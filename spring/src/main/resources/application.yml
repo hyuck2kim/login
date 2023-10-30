@@ -24,7 +24,7 @@ spring:
       password: 123
 
 jwt:
-  secret: lTZHJOgSr/nU9xFuKq4yNz3fGcywmqa2UQnXATaKhO8=
+  secret: 8a826b3711f5d89ad1b25c8fc1bd0d3d79c8a5befadaa142492763e194b719184c1ccac0690b019acb2e236c48a150a8304fe3c5a3fa38d57d480b041181f57b
 
 logging:
   level:

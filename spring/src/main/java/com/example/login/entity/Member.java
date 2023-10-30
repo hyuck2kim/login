@@ -22,7 +22,7 @@ public class Member {
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
-    private String nickname;
+    private String username;
     @Enumerated(EnumType.STRING)
     private Authority authority;
     @CreationTimestamp
@@ -33,7 +33,7 @@ public class Member {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.nickname = nickname;
+        this.username = nickname;
         this.authority = authority;
     }
 }

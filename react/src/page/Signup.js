@@ -31,13 +31,13 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     console.log(`handleSubmit 시작`);
     event.preventDefault();
-    console.log(`${API_URL}/api/signup`);
+    console.log(`${API_URL}/api/member/signup`);
     const formData = new FormData(event.currentTarget);
     const jsonObject = Object.fromEntries(formData);
     try {
-      console.log(`api url : ${API_URL}`);
+      console.log(`JSON.stringify(jsonObject) : ${JSON.stringify(jsonObject)}`);
       const response = await axios.post(
-        `${API_URL}/api/signup`,
+        `${API_URL}/api/member/signup`,
         JSON.stringify(jsonObject),
         API_CONFIG
       );
@@ -117,14 +117,6 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>

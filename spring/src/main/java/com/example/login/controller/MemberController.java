@@ -9,9 +9,10 @@ import com.example.login.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/member")
@@ -32,7 +33,9 @@ public class MemberController {
 
     @PostMapping("/signup")
     public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto requestDto) {
-        return ResponseEntity.ok(authService.signup(requestDto));
+        MemberResponseDto responseDto = authService.signup(requestDto);
+        String newResourceUri = "api/member/" + responseDto.getId();
+        return ResponseEntity.created(URI.create(newResourceUri)).body(responseDto);
     }
 
     @PostMapping("/signin")
@@ -43,21 +46,8 @@ public class MemberController {
     @GetMapping("/me")
     public ResponseEntity<MemberResponseDto> getMyMemberInfo() {
         MemberResponseDto myInfoBySecurity = memberService.getMyInfoBySecurity();
-        System.out.println(myInfoBySecurity.getNickname());
+        System.out.println(myInfoBySecurity.getUsername());
         return ResponseEntity.ok((myInfoBySecurity));
     }
 
-//    @PostMapping("/signup")
-//    public @ResponseBody ResponseEntity<String> signup(@RequestBody SignupRequestDto request) {
-//        Member member = request.toUser();
-//        System.out.println("회원가입 진행 : " + member);
-//        String rawPassword = member.getPassword();
-//        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-//        member.setPassword(encPassword);
-////        member.setRole("ROLE_USER");
-//        memberRepository.save(member);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED)
-//                .body("회원 가입이 성공적으로 완료되었습니다.");
-//    }
 }
